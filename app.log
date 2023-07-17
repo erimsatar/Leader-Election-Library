@@ -1,0 +1,64 @@
+2023-07-17T11:34:13.639+03:00  INFO 6392 --- [main] c.e.task_app_be.TaskAppBeApplicationKt   : Starting TaskAppBeApplicationKt using Java 17.0.8 with PID 6392 (/Users/erim/Desktop/Staj/task_app_be/build/classes/kotlin/main started by erim in /Users/erim/Desktop/Staj/task_app_be)
+2023-07-17T11:34:13.649+03:00  INFO 6392 --- [main] c.e.task_app_be.TaskAppBeApplicationKt   : No active profile set, falling back to 1 default profile: "default"
+2023-07-17T11:34:14.421+03:00  INFO 6392 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-17T11:34:14.492+03:00  INFO 6392 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64 ms. Found 1 JPA repository interfaces.
+2023-07-17T11:34:14.943+03:00  INFO 6392 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-07-17T11:34:14.950+03:00  INFO 6392 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-17T11:34:14.950+03:00  INFO 6392 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-17T11:34:15.019+03:00  INFO 6392 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-17T11:34:15.020+03:00  INFO 6392 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1328 ms
+2023-07-17T11:34:15.202+03:00  INFO 6392 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-17T11:34:15.244+03:00  INFO 6392 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.5.Final
+2023-07-17T11:34:15.246+03:00  INFO 6392 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-07-17T11:34:15.341+03:00  INFO 6392 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-17T11:34:15.433+03:00  INFO 6392 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-17T11:34:15.447+03:00  INFO 6392 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-07-17T11:34:16.299+03:00  INFO 6392 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@dfb07d7f
+2023-07-17T11:34:16.301+03:00  INFO 6392 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-07-17T11:34:16.642+03:00  INFO 6392 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-17T11:34:17.145+03:00  INFO 6392 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-17T11:34:17.526+03:00  INFO 6392 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-17T11:34:17.985+03:00  INFO 6392 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-07-17T11:34:18.513+03:00  WARN 6392 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-17T11:34:18.825+03:00  INFO 6392 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-07-17T11:34:18.840+03:00  INFO 6392 --- [main] c.e.task_app_be.TaskAppBeApplicationKt   : Started TaskAppBeApplicationKt in 5.583 seconds (process running for 6.244)
+2023-07-17T11:34:19.175+03:00  INFO 6392 --- [main] i.k.c.e.leaderelection.LeaderElector     : Start leader election with lock default/operator
+2023-07-17T11:34:31.191+03:00  INFO 6392 --- [main] i.k.c.e.leaderelection.LeaderElector     : Successfully acquired lease, became leader
+2023-07-17T11:34:40.126+03:00  INFO 6399 --- [main] c.e.task_app_be.TaskAppBeApplicationKt   : Starting TaskAppBeApplicationKt using Java 17.0.8 with PID 6399 (/Users/erim/Desktop/Staj/task_app_be/build/classes/kotlin/main started by erim in /Users/erim/Desktop/Staj/task_app_be)
+2023-07-17T11:34:40.129+03:00  INFO 6399 --- [main] c.e.task_app_be.TaskAppBeApplicationKt   : No active profile set, falling back to 1 default profile: "default"
+2023-07-17T11:34:41.205+03:00  INFO 6399 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-17T11:34:41.300+03:00  INFO 6399 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 80 ms. Found 1 JPA repository interfaces.
+2023-07-17T11:34:42.004+03:00  INFO 6399 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9091 (http)
+2023-07-17T11:34:42.011+03:00  INFO 6399 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-17T11:34:42.012+03:00  INFO 6399 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-17T11:34:42.109+03:00  INFO 6399 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-17T11:34:42.110+03:00  INFO 6399 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1941 ms
+2023-07-17T11:34:42.258+03:00  INFO 6399 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-17T11:34:42.297+03:00  INFO 6399 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.5.Final
+2023-07-17T11:34:42.299+03:00  INFO 6399 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-07-17T11:34:42.392+03:00  INFO 6399 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-17T11:34:42.482+03:00  INFO 6399 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-17T11:34:42.496+03:00  INFO 6399 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-07-17T11:34:43.201+03:00  INFO 6399 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@298da82d
+2023-07-17T11:34:43.202+03:00  INFO 6399 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-07-17T11:34:43.526+03:00  INFO 6399 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-17T11:34:43.911+03:00  INFO 6399 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-17T11:34:44.265+03:00  INFO 6399 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-17T11:34:44.692+03:00  INFO 6399 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-07-17T11:34:45.161+03:00  WARN 6399 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-17T11:34:45.452+03:00  INFO 6399 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9091 (http) with context path ''
+2023-07-17T11:34:45.468+03:00  INFO 6399 --- [main] c.e.task_app_be.TaskAppBeApplicationKt   : Started TaskAppBeApplicationKt in 5.896 seconds (process running for 6.643)
+2023-07-17T11:34:45.777+03:00  INFO 6399 --- [main] i.k.c.e.leaderelection.LeaderElector     : Start leader election with lock default/operator
+2023-07-17T11:35:15.848+03:00  INFO 6392 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-17T11:35:15.848+03:00  INFO 6392 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-17T11:35:15.849+03:00  INFO 6392 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-07-17T11:35:25.781+03:00  INFO 6399 --- [http-nio-9091-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-17T11:35:25.781+03:00  INFO 6399 --- [http-nio-9091-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-17T11:35:25.782+03:00  INFO 6399 --- [http-nio-9091-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-07-17T11:36:22.700+03:00  INFO 6392 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-17T11:36:22.702+03:00  INFO 6392 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-07-17T11:36:23.193+03:00  INFO 6392 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-07-17T11:36:33.894+03:00  INFO 6399 --- [main] i.k.c.e.leaderelection.LeaderElector     : Successfully acquired lease, became leader
+2023-07-17T11:36:39.720+03:00  INFO 6399 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-17T11:36:39.721+03:00  INFO 6399 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-07-17T11:36:40.219+03:00  INFO 6399 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
