@@ -1,14 +1,11 @@
 package com.example.task_app_be
 
 import com.example.task_app_be.config.ConfigProperties
-import io.kubernetes.client.extended.leaderelection.LeaderElectionConfig
-import io.kubernetes.client.extended.leaderelection.LeaderElector
-import io.kubernetes.client.extended.leaderelection.resourcelock.EndpointsLock
-import io.kubernetes.client.extended.leaderelection.resourcelock.LeaseLock
-import io.kubernetes.client.util.ClientBuilder
-import org.springframework.beans.factory.annotation.Autowired
+import io.fabric8.kubernetes.client.KubernetesClientBuilder
+import io.fabric8.kubernetes.client.extended.leaderelection.LeaderCallbacks
+import io.fabric8.kubernetes.client.extended.leaderelection.LeaderElectionConfigBuilder
+import io.fabric8.kubernetes.client.extended.leaderelection.resourcelock.LeaseLock
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 import java.time.Duration
 import java.util.*
@@ -18,8 +15,11 @@ import java.util.*
 //@EnableConfigurationProperties(ConfigProperties::class)
 class TaskAppBeApplication
 
+private const val NAMESPACE = "default"
+private const val NAME = "leaders-of-the-future"
+
 fun main(args: Array<String>) {
-	runApplication<TaskAppBeApplication>(*args)
+	/*
 	println(ConfigProperties.isLeader);
 	val apiClient = ClientBuilder.standard().build()
 	val leaseLock = LeaseLock("default", "operator", UUID.randomUUID().toString(), apiClient)
@@ -34,4 +34,33 @@ fun main(args: Array<String>) {
 		println("Do something when losing leadership.")
 		ConfigProperties.isLeader = false
 		}
+
+	 */
+	runApplication<TaskAppBeApplication>(*args)
+	val lockIdentity = UUID.randomUUID().toString()
+	val kc = KubernetesClientBuilder().build()
+	val leaderCallBacks = LeaderCallbacks(
+		{ConfigProperties.isLeader = true
+			println("STARTED LEADERSHIP")
+		},
+		{ConfigProperties.isLeader = false
+			println("STOPPED LEADERSHIP")},
+		{
+			newLeader -> println("New leader elected $newLeader")
+			ConfigProperties.isLeader = false
+		}
+	)
+	val leaderElectionConfigBuilder = LeaderElectionConfigBuilder()
+		.withReleaseOnCancel()
+		.withName("Sample Leader Election configuration")
+		.withLeaseDuration(Duration.ofSeconds(5))
+		.withLock( LeaseLock(NAMESPACE, NAME, lockIdentity))
+		.withRenewDeadline(Duration.ofSeconds(3))
+		.withRetryPeriod(Duration.ofSeconds(1))
+		.withLeaderCallbacks(leaderCallBacks)
+		.build()
+	val leader = kc.leaderElector().withConfig(leaderElectionConfigBuilder).build()
+	val f = leader.start()
+	Thread.sleep(15000)
+	f.cancel(true)
 }

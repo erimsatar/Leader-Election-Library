@@ -67,4 +67,8 @@ class TaskService(private val repository: TaskRepository) {
         return "Task with id: $id has been deleted."
     }
 
+    fun getLastTask(): Task {
+        return repository.findFirstByOrderByCreatedOnDesc()
+    }
+
 }

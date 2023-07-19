@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query
 interface TaskRepository: JpaRepository<Task,Long> {
     fun findTaskById(id:Long) : Task
 
+    fun findFirstByOrderByCreatedOnDesc(): Task
+
     @Query(value = "SELECT * FROM task WHERE is_task_open = TRUE", nativeQuery = true)
     fun queryAllOpenTasks(): List<Task>
 

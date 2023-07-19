@@ -23,6 +23,10 @@ class TaskController(private val service: TaskService) {
         }
         return service.getAllTasks()
     }
+    @GetMapping("last-task")
+    fun getLastTask(): Task{
+        return service.getLastTask()
+    }
 
     @GetMapping("open-tasks")
     fun getAllOpenTasks(): List<Task> = service.getAllOpenTasks()
