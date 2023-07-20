@@ -6,22 +6,41 @@ import com.example.task_app_be.model.TaskCreateRequest
 import com.example.task_app_be.model.TaskUpdateRequest
 import com.example.task_app_be.service.TaskService
 import jakarta.validation.Valid
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.client.RestTemplate
+import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.server.ResponseStatusException
+
 
 @RestController
 @RequestMapping("api")
-class TaskController(private val service: TaskService) {
+class TaskController(
+    private val service: TaskService,
+    private val restTemplate: RestTemplate
+) {
+    val webClient = WebClient.create()
 
     @GetMapping("all-tasks")
-    fun getAllTasks(): List<Task> {
-        if (!ConfigProperties.isLeader) {
+    fun getAllTasks(): Any? {
+        if (ConfigProperties.isLeader) {
+            return service.getAllTasks()
+        }
+        else if(ConfigProperties.leaderEndpoint != null) {
+            val leaderEnd = ConfigProperties.leaderEndpoint.plus("all-tasks")
+            println("Redirecting to leader.")
+            //return restTemplate.getForEntity("http://localhost:9090/api/all-tasks", String::class.java)
+            return webClient.get()
+                .uri("http://localhost:9090/api/all-tasks")
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(Array<Task>::class.java)
+        }
+        else{
             throw ResponseStatusException(HttpStatus.FORBIDDEN, "Resource not found")
         }
-        return service.getAllTasks()
     }
     @GetMapping("last-task")
     fun getLastTask(): Task{

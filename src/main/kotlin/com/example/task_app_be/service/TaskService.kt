@@ -22,10 +22,10 @@ class TaskService(private val repository: TaskRepository) {
         repository.findAll().stream().collect(Collectors.toList())
 
     fun getAllOpenTasks(): List<Task> =
-        repository.queryAllOpenTasks().stream().collect(Collectors.toList())
+        repository.findByTaskOpenIs(true)
 
     fun getAllClosedTasks(): List<Task> =
-        repository.queryAllClosedTasks().stream().collect(Collectors.toList())
+        repository.findByTaskOpenIs(false)
 
     fun getTaskById(id: Long): Task {
         checkForTaskId(id)
@@ -37,7 +37,7 @@ class TaskService(private val repository: TaskRepository) {
                 Task(
                     description = createRequest.description,
                     isReminderSet = createRequest.isReminderSet,
-                    isTaskOpen = createRequest.isTaskOpen,
+                    taskOpen = createRequest.isTaskOpen,
                     priority = createRequest.priority,
                     createdOn = LocalDateTime.now()
                 )
@@ -55,7 +55,7 @@ class TaskService(private val repository: TaskRepository) {
                 id = id,
                 description = updateRequest.description?: entity.description,
                 isReminderSet = updateRequest.isReminderSet ?: entity.isReminderSet,
-                isTaskOpen = updateRequest.isTaskOpen ?: entity.isTaskOpen,
+                taskOpen = updateRequest.isTaskOpen ?: entity.taskOpen,
                 priority = updateRequest.priority ?: entity.priority,
             )
         )

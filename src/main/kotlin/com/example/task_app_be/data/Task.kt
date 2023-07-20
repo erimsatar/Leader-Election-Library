@@ -23,7 +23,7 @@ data class Task(
     var isReminderSet: Boolean = false,
 
     @Column(name = "is_task_open", nullable = false)
-    var isTaskOpen: Boolean = true,
+    var taskOpen: Boolean = true,
 
     @Column(name = "created_on", nullable = false)
     var createdOn: LocalDateTime = LocalDateTime.now(),
