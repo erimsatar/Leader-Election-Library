@@ -26,7 +26,7 @@ class LeaderElectionConfig {
             {
                 ConfigProperties.isLeader = true
                 println("STARTED LEADERSHIP")
-                ConfigProperties.leaderEndpoint = "deneme" //should be the current url
+                ConfigProperties.leaderEndpoint = "http://localhost:9090/api" //should be the current url
             },
             {
                 ConfigProperties.isLeader = false
@@ -37,7 +37,7 @@ class LeaderElectionConfig {
             { newLeader ->
                 println("New leader elected $newLeader")
                 ConfigProperties.isLeader = false
-                ConfigProperties.leaderEndpoint = "deneme" // should be the leaders url
+                ConfigProperties.leaderEndpoint = "http://localhost:9090/api" // should be the leaders url
             }
         )
 
