@@ -108,13 +108,16 @@ class TaskService(private val repository: TaskRepository) {
     }
 
 
-    fun deleteTask(id: Long): Any {
+    fun deleteTask(id: Long): Any { //this doesnt work delete request needed.
         if (ConfigProperties.isLeader) {
             checkForTaskId(id)
             repository.deleteById(id)
             return "Task with id: $id has been deleted."
         } else {
-            return getRedirectNoParam("delete/$id")
+            val urlModifyingFilter = createUrlModifyingFilter("delete/$id")
+            webClient = createWebClient(urlModifyingFilter)
+            return webClient.delete()
+                .retrieve().bodyToMono(Any::class.java)
         }
     }
 
@@ -128,7 +131,6 @@ class TaskService(private val repository: TaskRepository) {
     }
 
     fun getRedirectNoParam(request: String): Any {
-        println("geldim birader.")
         val urlModifyingFilter = createUrlModifyingFilter(request)
         webClient = createWebClient(urlModifyingFilter)
         return webClient.get()

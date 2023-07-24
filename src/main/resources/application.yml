@@ -3,9 +3,9 @@ logging:
     name: app.log
 server:
   error:
-    include-binding-errors: never
-    include-message: never
-    include-stacktrace: never
+    include-binding-errors: always
+    include-message: always
+    include-stacktrace: always
   port: ${SERVER_PORT:8090}
 spring:
   datasource:
