@@ -7,5 +7,6 @@ class ConfigProperties {
     companion object {
         var isLeader: Boolean = false
         var leaderEndpoint:String? = null;
+        var redirectPath:String? = null;
     }
 }

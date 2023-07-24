@@ -17,8 +17,7 @@ import java.time.LocalDateTime
 import java.util.stream.Collectors
 
 @Service
-class TaskService(private val repository: TaskRepository) {
-    var webClient = WebClient.create()
+class TaskService(private val repository: TaskRepository,private val webClient: WebClient) {
 
     private fun checkForTaskId(id: Long) {
         if (!repository.existsById(id)) {
@@ -30,23 +29,26 @@ class TaskService(private val repository: TaskRepository) {
         if (ConfigProperties.isLeader) {
             return repository.findAll()
         } else {
-            return getRedirectNoParam("all-tasks")
+            ConfigProperties.redirectPath = "all-tasks"
+            return webClient.get().retrieve().bodyToMono(Any::class.java)
         }
     }
 
-    fun getAllOpenTasks(): Any? { //this doesnt work.
+    fun getAllOpenTasks(): Any? {
         if (ConfigProperties.isLeader) {
             return repository.findByTaskOpenIs(true)
         } else {
-            return getRedirectNoParam("all-tasks")
+            ConfigProperties.redirectPath = "open-tasks"
+            return webClient.get().retrieve().bodyToMono(Any::class.java)
         }
     }
 
-    fun getAllClosedTasks(): Any? { //this doesnt work.
+    fun getAllClosedTasks(): Any? {
         if (ConfigProperties.isLeader) {
             return repository.findByTaskOpenIs(false)
         } else {
-            return getRedirectNoParam("all-tasks")
+            ConfigProperties.redirectPath = "closed-tasks"
+            return webClient.get().retrieve().bodyToMono(Any::class.java)
         }
     }
 
@@ -55,7 +57,8 @@ class TaskService(private val repository: TaskRepository) {
             checkForTaskId(id)
             return repository.findTaskById(id)
         } else {
-            return getRedirectNoParam("task/$id")
+            ConfigProperties.redirectPath = "task/$id"
+            return webClient.get().retrieve().bodyToMono(Any::class.java)
         }
     }
 
@@ -75,9 +78,7 @@ class TaskService(private val repository: TaskRepository) {
                 throw (e)
             }
         } else {
-            val urlModifyingFilter = createUrlModifyingFilter("create")
-            webClient = createWebClient(urlModifyingFilter)
-            webClient.post()
+            return webClient.post()
                 .bodyValue(createRequest)
                 .retrieve()
                 .bodyToMono(Any::class.java)
@@ -85,7 +86,7 @@ class TaskService(private val repository: TaskRepository) {
     }
 
 
-    fun updateTask(updateRequest: TaskUpdateRequest, id: Long): Any {
+    fun updateTask(updateRequest: TaskUpdateRequest, id: Long): Any? {
         if (ConfigProperties.isLeader) {
             val entity = repository.findTaskById(id)
             return repository.save(
@@ -98,8 +99,6 @@ class TaskService(private val repository: TaskRepository) {
                 )
             )
         } else {
-            val urlModifyingFilter = createUrlModifyingFilter("update/$id")
-            webClient = createWebClient(urlModifyingFilter)
             return webClient.post()
                 .bodyValue(updateRequest)
                 .retrieve()
@@ -108,47 +107,25 @@ class TaskService(private val repository: TaskRepository) {
     }
 
 
-    fun deleteTask(id: Long): Any { //this doesnt work delete request needed.
+    fun deleteTask(id: Long): Any? {
         if (ConfigProperties.isLeader) {
             checkForTaskId(id)
             repository.deleteById(id)
             return "Task with id: $id has been deleted."
         } else {
-            val urlModifyingFilter = createUrlModifyingFilter("delete/$id")
-            webClient = createWebClient(urlModifyingFilter)
+            ConfigProperties.redirectPath = "delete/$id"
             return webClient.delete()
                 .retrieve().bodyToMono(Any::class.java)
         }
     }
 
-    fun getLastTask(): Any {
+    fun getLastTask(): Any? {
         if (ConfigProperties.isLeader) {
             return repository.findFirstByOrderByCreatedOnDesc()
         } else {
-            return getRedirectNoParam("last-task")
+            ConfigProperties.redirectPath = "last-task"
+            return webClient.get().retrieve().bodyToMono(Any::class.java)
         }
 
     }
-
-    fun getRedirectNoParam(request: String): Any {
-        val urlModifyingFilter = createUrlModifyingFilter(request)
-        webClient = createWebClient(urlModifyingFilter)
-        return webClient.get()
-            .retrieve().bodyToMono(Any::class.java)
-    }
-
-
-    fun createUrlModifyingFilter(request: String): ExchangeFilterFunction {
-        return ExchangeFilterFunction { clientRequest, nextFilter ->
-            val oldUrl = ConfigProperties.leaderEndpoint
-            val newUrl = URI.create("$oldUrl/$request")
-            val filteredRequest = ClientRequest.from(clientRequest)
-                .url(newUrl)
-                .build()
-            nextFilter.exchange(filteredRequest)
-        }
-    }
-
-    fun createWebClient(urlModifyingFilter: ExchangeFilterFunction): WebClient =
-        WebClient.builder().filter(urlModifyingFilter).build()
 }

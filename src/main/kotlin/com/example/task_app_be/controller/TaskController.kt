@@ -21,7 +21,7 @@ class TaskController(
 
 
     @GetMapping("last-task")
-    fun getLastTask(): Any =service.getLastTask()
+    fun getLastTask(): Any? =service.getLastTask()
 
 
     @GetMapping("open-tasks")
@@ -45,11 +45,11 @@ class TaskController(
     fun updateTask(
         @Valid @RequestBody updateRequest: TaskUpdateRequest,
         @PathVariable id: Long
-    ): Any = service.updateTask(updateRequest, id)
+    ): Any? = service.updateTask(updateRequest, id)
 
 
     @DeleteMapping("delete/{id}")
-    fun deleteTask(@PathVariable id: Long): Any =  service.deleteTask(id)
+    fun deleteTask(@PathVariable id: Long): Any? =  service.deleteTask(id)
 
 
 
